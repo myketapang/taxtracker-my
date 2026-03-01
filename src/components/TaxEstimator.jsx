@@ -1,7 +1,6 @@
 // src/components/TaxEstimator.jsx
 
 import React, { useState, useEffect } from 'react';
-import { BarChart3, TrendingUp } from 'lucide-react';
 import { getExpenses } from '../utils/storage';
 import { calculateTaxOutcome, calculateTotalByCategory } from '../utils/taxCalculations';
 import { RELIEF_DETAILS } from '../utils/reliefData';

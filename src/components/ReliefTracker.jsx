@@ -1,7 +1,7 @@
 // src/components/ReliefTracker.jsx
 
 import React, { useState, useEffect } from 'react';
-import { Trash2, Plus, Edit2 } from 'lucide-react';
+import { Trash2, Edit2 } from 'lucide-react';
 import { EXPENSE_CATEGORIES, RELIEF_DETAILS } from '../utils/reliefData';
 import { getExpenses, addExpense, deleteExpense, updateExpense } from '../utils/storage';
 import { calculateTotalByCategory, isCategoryLimitExceeded } from '../utils/taxCalculations';
@@ -184,7 +184,6 @@ const ReliefTracker = () => {
               const relief = getReliefForCategory(exp.category);
               const catName = EXPENSE_CATEGORIES.find(c => c.id === exp.category)?.label;
               const limit = RELIEF_DETAILS[relief]?.limit;
-              const categoryTotal = calculateTotalByCategory(expenses, relief);
               const isOver = isCategoryLimitExceeded(expenses, relief, limit);
 
               return (
