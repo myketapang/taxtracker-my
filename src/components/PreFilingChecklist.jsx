@@ -217,7 +217,8 @@ Need help? Visit https://www.hasil.gov.my
         </button>
       </div>
 
-      <div className="important-notes">
+      <div className="checklist-bottom-grid">
+        <div className="important-notes">
         <h4>📋 Important Notes</h4>
         <ul>
           <li><strong>Filing Deadline (YA 2025):</strong> 15 May 2026 (Form BE, salaried) / 15 July 2026 (Form B, business income). Penalties apply for late filing.</li>
@@ -260,6 +261,7 @@ Need help? Visit https://www.hasil.gov.my
           </div>
         </div>
       </div>
+      </div>{/* checklist-bottom-grid */}
     </div>
   );
 };
