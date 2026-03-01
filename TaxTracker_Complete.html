@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxTracker MY - Malaysian Tax Relief Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f9fafb;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 1.125rem;
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 0.625rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-large {
+            padding: 0.875rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.625rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* HOME PAGE */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* WIZARD */
+        .wizard-container {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .wizard-question h2 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .wizard-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .wizard-buttons .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        .relief-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .relief-card {
+            background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .relief-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .relief-limit {
+            font-weight: 600;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* TRACKER */
+        .tracker-layout {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+        }
+
+        .tracker-form {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .expenses-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .expense-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .expense-info p {
+            margin: 0.25rem 0;
+            font-size: 0.875rem;
+        }
+
+        .expense-amount {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.125rem;
+        }
+
+        .summary-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ESTIMATOR */
+        .estimator-form {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .result-highlight {
+            background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+            border: 2px solid var(--secondary);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .result-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 1rem 0;
+        }
+
+        /* CHECKLIST */
+        .checklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            align-items: flex-start;
+        }
+
+        .checklist-item.completed {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .checklist-checkbox {
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        /* FAQ */
+        .faq-list {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: white;
+            border: none;
+            text-align: left;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-item.expanded .faq-answer {
+            display: block;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .tracker-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .tracker-form {
+                position: static;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid, .relief-grid, .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.875rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* UTILITIES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #92400e;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #991b1b;
+            border-left: 4px solid var(--danger);
+        }
+
+        .alert-info {
+            background: rgba(37, 99, 235, 0.1);
+            color: #1e40af;
+            border-left: 4px solid var(--primary);
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo" onclick="showPage('home')">💰 TaxTracker MY</div>
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="showPage('home')">Home</li>
+                <li class="nav-item" onclick="showPage('wizard')">Wizard</li>
+                <li class="nav-item" onclick="showPage('tracker')">Tracker</li>
+                <li class="nav-item" onclick="showPage('estimator')">Estimator</li>
+                <li class="nav-item" onclick="showPage('checklist')">Checklist</li>
+                <li class="nav-item" onclick="showPage('faq')">FAQ</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="page-header">
+            <h1>Welcome to TaxTracker MY</h1>
+            <p>Your friendly tax relief companion for Malaysian salaried workers</p>
+        </div>
+
+        <div class="container">
+            <div class="hero">
+                <h2>Maximize Your Tax Reliefs. Minimize the Hassle.</h2>
+                <p>Most Malaysians leave money on the table each year. Our app helps you claim every relief you're entitled to, simply and confidently.</p>
+                <button class="btn btn-primary btn-large" onclick="showPage('wizard')">Start the Wizard</button>
+            </div>
+
+            <h2 style="text-align: center; margin-top: 3rem;">How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showPage('wizard')">
+                    <div class="feature-icon">🧙</div>
+                    <h3>Relief Wizard</h3>
+                    <p>Simple Q&A to discover which reliefs you can claim</p>
+                </div>
+                <div class="feature-card" onclick="showPage('tracker')">
+                    <div class="feature-icon">📊</div>
+                    <h3>Expense Tracker</h3>
+                    <p>Record your tax-deductible expenses</p>
+                </div>
+                <div class="feature-card" onclick="showPage('estimator')">
+                    <div class="feature-icon">🧮</div>
+                    <h3>Tax Estimator</h3>
+                    <p>Calculate your estimated refund</p>
+                </div>
+                <div class="feature-card" onclick="showPage('checklist')">
+                    <div class="feature-icon">✅</div>
+                    <h3>Filing Checklist</h3>
+                    <p>Step-by-step guide to prepare for filing</p>
+                </div>
+                <div class="feature-card" onclick="showPage('faq')">
+                    <div class="feature-icon">❓</div>
+                    <h3>FAQ & Guides</h3>
+                    <p>Learn about reliefs and compliance</p>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 0.75rem; padding: 2rem; margin: 3rem 0; box-shadow: var(--shadow);">
+                <h2>Why Use TaxTracker MY?</h2>
+                <div class="grid">
+                    <div>
+                        <h4>🤔 "I'm not sure what I can claim"</h4>
+                        <p>We'll guide you through a simple wizard to identify all eligible reliefs</p>
+                    </div>
+                    <div>
+                        <h4>📝 "I can't remember all my expenses"</h4>
+                        <p>Track expenses throughout the year, not just in March</p>
+                    </div>
+                    <div>
+                        <h4>💸 "What's my refund going to be?"</h4>
+                        <p>Get a clear estimate of your likely refund before filing</p>
+                    </div>
+                    <div>
+                        <h4>😰 "Am I claiming too much?"</h4>
+                        <p>We show you the limits for each relief to keep you safe</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--primary); border-radius: 0.5rem; padding: 2rem; margin-bottom: 2rem;">
+                <h3>⚠️ Important Disclaimer</h3>
+                <p>This application is an educational tool to help you understand Malaysian tax reliefs. It is NOT official tax advice. Always verify information with LHDN and your e-Filing form. Keep all receipts for 7 years.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIZARD PAGE -->
+    <div id="wizard" class="page">
+        <div class="page-header">
+            <h1>Relief Eligibility Wizard</h1>
+            <p>Discover which tax reliefs you can claim</p>
+        </div>
+
+        <div class="container">
+            <div class="wizard-container" id="wizardContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                <p id="progressText" style="text-align: right; color: var(--text-light); margin-bottom: 2rem;">Question 1 of 10</p>
+
+                <div class="wizard-question">
+                    <h2 id="questionText"></h2>
+                    <div class="wizard-buttons" id="answerButtons"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button class="btn btn-outline" onclick="wizardBack()" id="backBtn" disabled>← Back</button>
+                        <button class="btn btn-outline" onclick="wizardSkip()">Skip →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wizardResults" class="hidden">
+                <div class="card">
+                    <h2>Your Eligible Reliefs</h2>
+                    <div class="relief-grid" id="eligibleReliefs"></div>
+                    <button class="btn btn-primary mt-4" onclick="startWizardOver()">Start Over</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRACKER PAGE -->
+    <div id="tracker" class="page">
+        <div class="page-header">
+            <h1>Expense Tracker</h1>
+            <p>Record your tax-deductible expenses</p>
+        </div>
+
+        <div class="container tracker-layout">
+            <div class="tracker-form">
+                <h3>Add Expense</h3>
+                <form onsubmit="addExpense(event)">
+                    <div class="form-group">
+                        <label>Amount (RM)</label>
+                        <input type="number" id="expenseAmount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="expenseCategory" required>
+                            <option value="books">Books & Materials</option>
+                            <option value="internet">Internet Subscription</option>
+                            <option value="gym">Gym Membership</option>
+                            <option value="medical">Medical Checkup</option>
+                            <option value="dental">Dental Treatment</option>
+                            <option value="insurance">Insurance Premium</option>
+                            <option value="education">Education Fees</option>
+                            <option value="sspn">SSPN Contribution</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="expenseDesc" placeholder="e.g., Annual gym membership">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Add Expense</button>
+                </form>
+            </div>
+
+            <div>
+                <div class="card">
+                    <h3>Your Expenses</h3>
+                    <div class="expenses-list" id="expensesList">
+                        <p style="text-align: center; color: var(--text-light);">No expenses recorded yet</p>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <h3>Summary by Relief Type</h3>
+                    <div id="summaryList">
+                        <p style="text-align: center; color: var(--text-light);">Add expenses to see summary</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESTIMATOR PAGE -->
+    <div id="estimator" class="page">
+        <div class="page-header">
+            <h1>Tax Outcome Estimator</h1>
+            <p>Calculate your estimated refund or tax due</p>
+        </div>
+
+        <div class="container">
+            <div class="estimator-form">
+                <h3>Enter Your Income</h3>
+                <form onsubmit="calculateTax(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Gross Annual Income (RM)</label>
+                            <input type="number" id="grossIncome" step="100" min="0" placeholder="60000">
+                            <small>Your total employment income</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Total PCB Deducted (RM)</label>
+                            <input type="number" id="pcbDeducted" step="100" min="0" placeholder="2400">
+                            <small>Sum of all 12 monthly payslips</small>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Calculate Tax Outcome</button>
+                </form>
+            </div>
+
+            <div id="estimatorResults" class="hidden">
+                <div class="result-card">
+                    <h3>Your Tax Estimate</h3>
+                    <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                        <div class="summary-item">
+                            <span>Gross Income</span>
+                            <span id="resultGross">RM 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Reliefs</span>
+                            <span id="resultReliefs">RM 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Taxable Income</span>
+                            <span id="resultTaxable">RM 0</span>
+                        </div>
+                    </div>
+
+                    <div class="result-highlight">
+                        <h4 id="resultStatus">Expected Refund</h4>
+                        <div class="result-amount" id="resultAmount">RM 0</div>
+                        <p id="resultInfo">Based on 2024 tax rates</p>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>⚠️ Disclaimer:</strong> This is an estimate. Your actual tax liability is determined by LHDN. Always verify with your e-Filing form.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKLIST PAGE -->
+    <div id="checklist" class="page">
+        <div class="page-header">
+            <h1>Pre-Filing Checklist</h1>
+            <p>Get ready to file with confidence</p>
+        </div>
+
+        <div class="container">
+            <div class="checklist-items">
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>1. Received EA Form from employer</h4>
+                        <p>Your employer should send this by 31 March. It shows your gross salary and PCB paid.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>2. Gathered all original receipts</h4>
+                        <p>Collect receipts for insurance, medical, education, and other expenses. Keep for 7 years.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>3. Recorded all expenses in Tracker</h4>
+                        <p>Use the Tracker tool to log all qualifying expenses with dates and amounts.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>4. Calculated reliefs using Estimator</h4>
+                        <p>Run the Estimator to see your estimated refund based on reliefs claimed.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>5. Total PCB calculated from payslips</h4>
+                        <p>Add up all PCB amounts from your 12 monthly payslips. This is what you've already paid.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>6. Reviewed all amounts</h4>
+                        <p>Double-check that all relief amounts are correct before submitting to LHDN.</p>
+                    </div>
+                </div>
+
+                <div class="checklist-item" onclick="toggleCheckbox(this)">
+                    <span class="checklist-checkbox">☐</span>
+                    <div>
+                        <h4>7. Ready to file</h4>
+                        <p>Go to https://efiling.hasil.gov.my and submit your self-assessment return.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <h3>📅 Filing Timeline</h3>
+                <div class="grid">
+                    <div>
+                        <strong>Jan - Feb</strong>
+                        <p>Year ends, gather receipts</p>
+                    </div>
+                    <div>
+                        <strong>Mar - Apr</strong>
+                        <p>LHDN opens e-Filing, receive EA form</p>
+                    </div>
+                    <div>
+                        <strong>May - Jun</strong>
+                        <p>File your return (Deadline: 30 June)</p>
+                    </div>
+                    <div>
+                        <strong>Jul - Sep</strong>
+                        <p>Refunds processed to bank account</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📋 Important Notes</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0;">✓ Filing Deadline: 30 June each year</li>
+                    <li style="padding: 0.5rem 0;">✓ Keep Records: Retain all receipts for 7 years</li>
+                    <li style="padding: 0.5rem 0;">✓ LHDN Portal: https://efiling.hasil.gov.my</li>
+                    <li style="padding: 0.5rem 0;">✓ Refund Processing: Usually 6-8 weeks</li>
+                    <li style="padding: 0.5rem 0;">✓ Amendments: File amended return if errors found</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ PAGE -->
+    <div id="faq" class="page">
+        <div class="page-header">
+            <h1>FAQ & Guides</h1>
+            <p>Answers to common questions about Malaysian tax reliefs</p>
+        </div>
+
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is this app for?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">This app helps Malaysian salaried taxpayers identify reliefs they can claim and track their eligible expenses throughout the year. It provides estimates to help you understand potential refunds.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Who can use this app?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">This app is designed for salaried individuals in Malaysia with basic tax situations. If you have business income, rental income, or complex deductions, please consult a professional accountant.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What are tax reliefs?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">Tax reliefs are amounts you can deduct from your gross income to reduce your taxable income. Common reliefs include spouse relief, children relief, insurance premiums, medical expenses, and education fees.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is the tax estimate accurate?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">The estimate is based on 2024 tax bands and standard assumptions. Actual tax liability depends on your exact circumstances. Always verify with LHDN e-Filing before submission.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What receipts do I need to keep?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">Keep original receipts and supporting documents for all claimed expenses. LHDN may request these during an audit. Keep records for at least 7 years.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>When should I file my taxes?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">The filing deadline for salaried individuals in Malaysia is typically June 30 each year. You will receive notice from LHDN when filing opens (usually around April).</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I submit to LHDN?</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="faq-answer">Log into the LHDN e-Filing portal (https://efiling.hasil.gov.my) with your MyAccount credentials. You can manually enter the relief amounts this app calculates for you.</div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Malaysian Tax Reliefs Overview</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>👤 Personal Reliefs</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0;"><strong>Self Relief:</strong> RM 9,000 (Automatic)</li>
+                        <li style="padding: 0.5rem 0;"><strong>Spouse Relief:</strong> RM 9,000 (If married)</li>
+                        <li style="padding: 0.5rem 0;"><strong>Children:</strong> RM 3,000 per child</li>
+                        <li style="padding: 0.5rem 0;"><strong>Parents:</strong> RM 2,000 each (Age 60+)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🏥 Health & Insurance</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0;"><strong>Medical:</strong> RM 5,000</li>
+                        <li style="padding: 0.5rem 0;"><strong>Insurance:</strong> RM 8,000</li>
+                        <li style="padding: 0.5rem 0;">Checkups, dental, optical, treatment</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📚 Education & Savings</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0;"><strong>Education:</strong> RM 6,000</li>
+                        <li style="padding: 0.5rem 0;"><strong>SSPN/PTPTN:</strong> RM 8,000</li>
+                        <li style="padding: 0.5rem 0;">University, college, education savings</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🏠 Housing & Lifestyle</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0;"><strong>Housing Interest:</strong> RM 6,000</li>
+                        <li style="padding: 0.5rem 0;"><strong>Lifestyle:</strong> RM 1,000</li>
+                        <li style="padding: 0.5rem 0;">Books, internet, sports, gym</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <h3>🔗 Useful Resources</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0;">📍 <strong>LHDN Website:</strong> https://www.hasil.gov.my</li>
+                    <li style="padding: 0.5rem 0;">📍 <strong>e-Filing Portal:</strong> https://efiling.hasil.gov.my</li>
+                    <li style="padding: 0.5rem 0;">📍 <strong>MyAccount:</strong> https://www.myaccount.gov.my</li>
+                    <li style="padding: 0.5rem 0;">📍 <strong>Tax Relief Info:</strong> hasil.gov.my/tax-reliefs</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <strong>⚠️ Important Disclaimer:</strong><br>
+                This application is an educational tool to help you understand Malaysian tax reliefs. It is NOT official tax advice. Always verify information with LHDN (Lembaga Hasil Dalam Negeri Malaysia) and your e-Filing form. Keep all receipts for 7 years.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PAGE NAVIGATION
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            pages.forEach(page => page.classList.remove('active'));
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            event.target.closest('.nav-item') ? event.target.closest('.nav-item').classList.add('active') : null;
+            
+            window.scrollTo(0, 0);
+        }
+
+        // WIZARD FUNCTIONALITY
+        const wizardQuestions = [
+            { q: 'Are you married?', relief: 'spouse' },
+            { q: 'Do you have any children/dependents in school?', relief: 'children' },
+            { q: 'Do you support parents/in-laws aged 60+?', relief: 'parents' },
+            { q: 'Do you have life or medical insurance?', relief: 'insurance' },
+            { q: 'Do you have a residential housing loan?', relief: 'housing' },
+            { q: 'Are you pursuing higher education?', relief: 'education' },
+            { q: 'Do you pay PTPTN or have SSPN savings?', relief: 'sspn' },
+            { q: 'Had medical checkups or dental treatment?', relief: 'medical' },
+            { q: 'Bought books, courses, internet, gym membership?', relief: 'lifestyle' },
+            { q: 'Do you have other qualifying expenses?', relief: 'other' }
+        ];
+
+        const reliefInfo = {
+            spouse: { name: 'Spouse Relief', limit: 'RM 9,000', desc: 'For married individuals (1 spouse only)' },
+            children: { name: 'Children Relief', limit: 'RM 3,000 each', desc: 'Max 4 children' },
+            parents: { name: 'Parents Relief', limit: 'RM 2,000 each', desc: 'For parents aged 60+' },
+            insurance: { name: 'Life/Medical Insurance', limit: 'RM 8,000', desc: 'Insurance premiums' },
+            housing: { name: 'Housing Loan Interest', limit: 'RM 6,000', desc: 'Residential property loans' },
+            education: { name: 'Education Fees', limit: 'RM 6,000', desc: 'University/college tuition' },
+            sspn: { name: 'SSPN/PTPTN', limit: 'RM 8,000', desc: 'Education savings/loans' },
+            medical: { name: 'Medical Expenses', limit: 'RM 5,000', desc: 'Checkups, dental, optical' },
+            lifestyle: { name: 'Lifestyle Expenses', limit: 'RM 1,000', desc: 'Books, internet, sports' }
+        };
+
+        let wizardAnswers = {};
+        let currentQuestion = 0;
+
+        function initWizard() {
+            currentQuestion = 0;
+            wizardAnswers = {};
+            showWizardQuestion();
+        }
+
+        function showWizardQuestion() {
+            const q = wizardQuestions[currentQuestion];
+            document.getElementById('questionText').textContent = q.q;
+            document.getElementById('progressBar').style.width = ((currentQuestion + 1) / wizardQuestions.length * 100) + '%';
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${wizardQuestions.length}`;
+            document.getElementById('backBtn').disabled = currentQuestion === 0;
+
+            const btnsDiv = document.getElementById('answerButtons');
+            btnsDiv.innerHTML = `
+                <button class="btn btn-secondary" onclick="wizardAnswer(false)">No</button>
+                <button class="btn btn-primary" onclick="wizardAnswer(true)">Yes</button>
+            `;
+        }
+
+        function wizardAnswer(yes) {
+            wizardAnswers[wizardQuestions[currentQuestion].relief] = yes;
+            if (currentQuestion < wizardQuestions.length - 1) {
+                currentQuestion++;
+                showWizardQuestion();
+            } else {
+                showWizardResults();
+            }
+        }
+
+        function wizardBack() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showWizardQuestion();
+            }
+        }
+
+        function wizardSkip() {
+            if (currentQuestion < wizardQuestions.length - 1) {
+                currentQuestion++;
+                showWizardQuestion();
+            } else {
+                showWizardResults();
+            }
+        }
+
+        function showWizardResults() {
+            document.getElementById('wizardContainer').style.display = 'none';
+            document.getElementById('wizardResults').classList.remove('hidden');
+
+            const eligible = Object.entries(wizardAnswers)
+                .filter(([k, v]) => v === true)
+                .map(([k, v]) => k);
+
+            let html = '';
+            eligible.forEach(relief => {
+                const info = reliefInfo[relief];
+                html += `
+                    <div class="relief-card">
+                        <h4>${info.name}</h4>
+                        <span class="relief-limit">${info.limit}</span>
+                        <p>${info.desc}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('eligibleReliefs').innerHTML = html;
+        }
+
+        function startWizardOver() {
+            document.getElementById('wizardContainer').style.display = 'block';
+            document.getElementById('wizardResults').classList.add('hidden');
+            initWizard();
+        }
+
+        // TRACKER FUNCTIONALITY
+        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+        function addExpense(e) {
+            e.preventDefault();
+            const expense = {
+                id: Date.now(),
+                amount: parseFloat(document.getElementById('expenseAmount').value),
+                category: document.getElementById('expenseCategory').value,
+                desc: document.getElementById('expenseDesc').value,
+                date: document.getElementById('expenseDate').value
+            };
+            expenses.push(expense);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            document.querySelector('#tracker form').reset();
+            updateExpensesList();
+        }
+
+        function updateExpensesList() {
+            let html = '';
+            if (expenses.length === 0) {
+                html = '<p style="text-align: center; color: var(--text-light);">No expenses recorded yet</p>';
+            } else {
+                expenses.forEach(exp => {
+                    html += `
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <p style="font-weight: 600;">${exp.category.toUpperCase()}</p>
+                                <p>${exp.desc}</p>
+                                <p style="font-size: 0.75rem; color: var(--text-light);">${exp.date}</p>
+                            </div>
+                            <div class="expense-amount">RM ${exp.amount.toFixed(2)}</div>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('expensesList').innerHTML = html;
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const categories = ['books', 'internet', 'gym', 'medical', 'dental', 'insurance', 'education', 'sspn'];
+            let html = '';
+            let total = 0;
+
+            categories.forEach(cat => {
+                const sum = expenses.filter(e => e.category === cat).reduce((a, b) => a + b.amount, 0);
+                if (sum > 0) {
+                    html += `
+                        <div class="summary-item">
+                            <span>${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>
+                            <span>RM ${sum.toFixed(2)}</span>
+                        </div>
+                    `;
+                    total += sum;
+                }
+            });
+
+            if (html) {
+                html += `<div class="summary-item" style="font-weight: bold; margin-top: 1rem;">
+                    <span>TOTAL EXPENSES</span>
+                    <span>RM ${total.toFixed(2)}</span>
+                </div>`;
+            }
+
+            document.getElementById('summaryList').innerHTML = html || '<p style="text-align: center; color: var(--text-light);">Add expenses to see summary</p>';
+        }
+
+        // ESTIMATOR FUNCTIONALITY
+        function calculateTax(e) {
+            e.preventDefault();
+            const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+            const pcb = parseFloat(document.getElementById('pcbDeducted').value) || 0;
+
+            let reliefs = 9000; // Self relief
+            expenses.forEach(exp => {
+                if (['books', 'internet', 'gym'].includes(exp.category)) reliefs += Math.min(1000, exp.amount);
+                else if (['medical', 'dental'].includes(exp.category)) reliefs += Math.min(5000, exp.amount);
+                else if (exp.category === 'insurance') reliefs += Math.min(8000, exp.amount);
+                else if (exp.category === 'education') reliefs += Math.min(6000, exp.amount);
+                else if (exp.category === 'sspn') reliefs += Math.min(8000, exp.amount);
+            });
+
+            const taxable = Math.max(0, gross - reliefs);
+            const tax = calculateTaxBand(taxable);
+            const diff = pcb - tax;
+
+            document.getElementById('resultGross').textContent = `RM ${gross.toLocaleString()}`;
+            document.getElementById('resultReliefs').textContent = `RM ${reliefs.toLocaleString()}`;
+            document.getElementById('resultTaxable').textContent = `RM ${taxable.toLocaleString()}`;
+            document.getElementById('resultAmount').textContent = `RM ${Math.abs(diff).toLocaleString()}`;
+            document.getElementById('resultStatus').textContent = diff > 0 ? '💰 Expected Refund' : diff < 0 ? '💳 Amount Due' : '✅ Balanced';
+            document.getElementById('estimatorResults').classList.remove('hidden');
+        }
+
+        function calculateTaxBand(taxable) {
+            if (taxable <= 35000) return 0;
+            if (taxable <= 80000) return (taxable - 35000) * 0.03;
+            if (taxable <= 135000) return 1350 + (taxable - 80000) * 0.08;
+            if (taxable <= 250000) return 5750 + (taxable - 135000) * 0.135;
+            if (taxable <= 400000) return 21312.5 + (taxable - 250000) * 0.19;
+            if (taxable <= 600000) return 49562.5 + (taxable - 400000) * 0.23;
+            return 95562.5 + (taxable - 600000) * 0.25;
+        }
+
+        // CHECKLIST
+        function toggleCheckbox(el) {
+            el.classList.toggle('completed');
+            const checkbox = el.querySelector('.checklist-checkbox');
+            checkbox.textContent = el.classList.contains('completed') ? '☑' : '☐';
+        }
+
+        // FAQ
+        function toggleFAQ(btn) {
+            const faqItem = btn.closest('.faq-item');
+            faqItem.classList.toggle('expanded');
+            const arrow = btn.querySelector('span:last-child');
+            arrow.textContent = faqItem.classList.contains('expanded') ? '▲' : '▼';
+        }
+
+        // INITIALIZE
+        window.addEventListener('load', () => {
+            updateExpensesList();
+            const today = new Date().toISOString().split('T')[0];
+            if (document.getElementById('expenseDate')) {
+                document.getElementById('expenseDate').value = today;
+            }
+        });
+    </script>
+</body>
+</html>
