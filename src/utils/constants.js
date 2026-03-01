@@ -29,19 +29,25 @@ export const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-export const FILING_DEADLINE = '30 June'; // Annual filing deadline for Malaysia
-export const PCB_COLLECTION_END = '30 April'; // Last PCB collection month
+export const FILING_DEADLINE = '15 May'; // e-Filing deadline for salaried individuals (Form BE), mandatory e-Filing from YA 2025
+export const FILING_DEADLINE_BUSINESS = '15 July'; // e-Filing deadline for individuals with business income (Form B)
+export const PCB_COLLECTION_END = '28 February'; // EA form deadline from employer
 
 export const DISCLAIMER_TEXT = `
-This application is provided as an educational tool to help Malaysian salaried taxpayers 
-understand and track tax reliefs they may be eligible for. 
+This application is provided as an educational tool to help Malaysian salaried taxpayers
+understand and track tax reliefs they may be eligible for.
 
-IMPORTANT: The calculations and suggestions in this app are estimates based on 2024 tax regulations. 
-They are NOT official tax advice. 
+IMPORTANT: The calculations and suggestions in this app are estimates based on YA 2025 tax regulations
+(e-Filing 2026). They are NOT official tax advice.
+
+Key 2026 e-Filing requirements:
+- e-Filing is now MANDATORY — paper BE/BN forms are no longer accepted.
+- Pre-filled data is available on MyTax portal from 1 March 2026.
+- Deadline: 15 May 2026 (Form BE, salaried) / 15 July 2026 (Form B, business income).
 
 For authoritative information, please refer to:
 - LHDN (Lembaga Hasil Dalam Negeri Malaysia) official website: https://www.hasil.gov.my
-- Your official e-Filing portal
+- Your official e-Filing portal (MyTax)
 - Licensed tax consultants or accountants
 
 Your actual tax liability is determined by your completed e-Filing form and LHDN assessment.
@@ -63,7 +69,7 @@ export const FAQ_DATA = [
   },
   {
     question: 'Is the tax estimate accurate?',
-    answer: 'The estimate is based on 2024 tax bands and standard assumptions. Actual tax liability depends on your exact circumstances. Always verify with LHDN e-Filing before submission.'
+    answer: 'The estimate is based on YA 2025 tax bands (11 progressive brackets, 0%–28%) and standard assumptions. Actual tax liability depends on your exact circumstances. Always verify with LHDN e-Filing before submission.'
   },
   {
     question: 'Can I claim the same expense twice?',
@@ -75,11 +81,11 @@ export const FAQ_DATA = [
   },
   {
     question: 'When should I file my taxes?',
-    answer: 'The filing deadline for salaried individuals in Malaysia is typically June 30 each year. You will receive notice from LHDN when filing opens (usually around April).'
+    answer: 'For YA 2025 (filing in 2026): salaried individuals (Form BE) must file by 15 May 2026. Those with business income (Form B) have until 15 July 2026. e-Filing is now mandatory — paper forms are no longer accepted. Pre-filled data is available on MyTax from 1 March 2026.'
   },
   {
     question: 'How do I submit to LHDN?',
-    answer: 'Log into the LHDN e-Filing portal (https://efiling.hasil.gov.my) with your MyAccount credentials. You can manually enter the relief amounts this app calculates for you.'
+    answer: 'Log into the MyTax portal (https://mytax.hasil.gov.my) with your MyAccount or TIN credentials. From YA 2025, all submissions must be via e-Filing — paper BE/BN forms are not accepted. Review your pre-filled data, enter any additional relief amounts, and submit online.'
   },
   {
     question: 'What if I\'ve never filed before?',

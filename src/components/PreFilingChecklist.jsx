@@ -59,7 +59,7 @@ const PreFilingChecklist = () => {
 
     const summaryText = `
 LHDN e-FILING SUMMARY
-Tax Year 2024
+Tax Year 2025 (YA 2025 — Filing 2026)
 Generated: ${new Date().toLocaleDateString('en-MY')}
 
 RELIEF CLAIMED SUMMARY:
@@ -80,7 +80,8 @@ WHEN YOU LOG INTO e-FILING:
 
 REMEMBER:
 - Keep all original receipts for 7 years
-- Submit your return by 30 June
+- Submit your return by 15 May (Form BE, salaried) or 15 July (Form B, business)
+- e-Filing is MANDATORY — paper forms are no longer accepted
 - If you get a refund, it will be credited to your bank account
 
 Need help? Visit https://www.hasil.gov.my
@@ -88,7 +89,7 @@ Need help? Visit https://www.hasil.gov.my
 
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(summaryText));
-    element.setAttribute('download', 'tax_summary_2024.txt');
+    element.setAttribute('download', 'tax_summary_2025.txt');
     element.style.display = 'none';
     document.body.appendChild(element);
     element.click();
@@ -101,7 +102,7 @@ Need help? Visit https://www.hasil.gov.my
     <div className="checklist-container">
       <div className="checklist-intro">
         <h3>Pre-Filing Checklist</h3>
-        <p>Complete these steps before filing your taxes in June/July</p>
+        <p>Complete these steps before filing your YA 2025 taxes (deadline: 15 May 2026 for Form BE)</p>
       </div>
 
       <div className="checklist-items">
@@ -114,7 +115,7 @@ Need help? Visit https://www.hasil.gov.my
           </button>
           <div className="checklist-content">
             <h4>Received EA Form from your employer</h4>
-            <p>Your employer should send this by 31 March. It shows your gross salary, deductions, and PCB paid.</p>
+            <p>Your employer must send this by 28 February. It shows your gross salary, deductions, and PCB paid. Check it against your payslips before filing.</p>
           </div>
         </div>
 
@@ -195,7 +196,7 @@ Need help? Visit https://www.hasil.gov.my
           </button>
           <div className="checklist-content">
             <h4>Ready to file</h4>
-            <p>Go to https://efiling.hasil.gov.my and submit your self-assessment return.</p>
+            <p>Log into MyTax (https://mytax.hasil.gov.my), review your pre-filled data, enter relief amounts, and submit. e-Filing is mandatory — paper forms are no longer accepted.</p>
           </div>
         </div>
       </div>
@@ -219,10 +220,12 @@ Need help? Visit https://www.hasil.gov.my
       <div className="important-notes">
         <h4>📋 Important Notes</h4>
         <ul>
-          <li><strong>Filing Deadline:</strong> 30 June each year (penalties apply for late filing)</li>
+          <li><strong>Filing Deadline (YA 2025):</strong> 15 May 2026 (Form BE, salaried) / 15 July 2026 (Form B, business income). Penalties apply for late filing.</li>
+          <li><strong>e-Filing Mandatory:</strong> Paper BE/BN forms are no longer accepted from YA 2025 onward.</li>
+          <li><strong>Pre-filled Data:</strong> Available on MyTax from 1 March 2026 — review and amend before submitting.</li>
           <li><strong>Keep Records:</strong> Retain all receipts for minimum 7 years for audit purposes</li>
-          <li><strong>LHDN Portal:</strong> https://efiling.hasil.gov.my</li>
-          <li><strong>MyAccount Login:</strong> Use your ID number as username</li>
+          <li><strong>LHDN Portal:</strong> https://mytax.hasil.gov.my</li>
+          <li><strong>MyAccount Login:</strong> Use your TIN or IC number as username</li>
           <li><strong>Refund Processing:</strong> Usually 6-8 weeks direct to your bank account</li>
           <li><strong>Amendments:</strong> If you find errors, file an amended return (Form BE)</li>
         </ul>
@@ -233,19 +236,27 @@ Need help? Visit https://www.hasil.gov.my
         <div className="timeline">
           <div className="timeline-item">
             <span className="month">Jan - Feb</span>
-            <span className="event">Year ends, gather receipts</span>
+            <span className="event">YA 2025 year ends — gather receipts & payslips. EA form due from employer by 28 Feb.</span>
+          </div>
+          <div className="timeline-item">
+            <span className="month">1 Mar</span>
+            <span className="event">Pre-filled e-Filing data available on MyTax portal — review and amend.</span>
           </div>
           <div className="timeline-item">
             <span className="month">Mar - Apr</span>
-            <span className="event">LHDN opens e-Filing, receive EA form</span>
+            <span className="event">Finalize expenses, run estimator, confirm relief amounts.</span>
           </div>
           <div className="timeline-item">
-            <span className="month">May - Jun</span>
-            <span className="event">File your return (Deadline: 30 June)</span>
+            <span className="month">By 15 May</span>
+            <span className="event">File Form BE (salaried). e-Filing only — deadline extended from old 30 June.</span>
           </div>
           <div className="timeline-item">
-            <span className="month">Jul - Sep</span>
-            <span className="event">Refunds processed to bank account</span>
+            <span className="month">By 15 Jul</span>
+            <span className="event">File Form B (business income). e-Filing only.</span>
+          </div>
+          <div className="timeline-item">
+            <span className="month">Jun - Sep</span>
+            <span className="event">Refunds processed to bank account (typically 6–8 weeks after submission).</span>
           </div>
         </div>
       </div>

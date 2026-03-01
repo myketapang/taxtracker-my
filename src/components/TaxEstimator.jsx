@@ -168,7 +168,7 @@ const TaxEstimator = () => {
 
             <div className="disclaimer-box">
               <p><strong>⚠️ Important Disclaimer:</strong></p>
-              <p>This is an estimate based on 2024 tax bands and standard assumptions. Your actual tax liability depends on your exact circumstances and LHDN assessment. Always verify with your e-Filing form before submission.</p>
+              <p>This is an estimate based on YA 2025 tax bands (0%–28%, 11 brackets) and standard assumptions. Your actual tax liability depends on your exact circumstances and LHDN assessment. Always verify with your e-Filing form before submission.</p>
             </div>
           </div>
         </div>

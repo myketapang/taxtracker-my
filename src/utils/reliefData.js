@@ -29,38 +29,38 @@ export const RELIEF_DETAILS = {
   },
   children: {
     name: 'Children',
-    limit: 3000,
-    description: 'RM3,000 per child (max 4 children)',
+    limit: 2000,
+    description: 'RM2,000 per child under 18 (or studying full-time)',
     category: 'Family'
   },
   parents: {
     name: 'Parents/In-laws',
-    limit: 8000,
-    description: 'For parents aged 60+, RM2,000 each (max 2 parents)',
+    limit: 5000,
+    description: 'Medical/care expenses for parents (combined limit)',
     category: 'Family'
   },
   lifestyle: {
     name: 'Lifestyle & Expenses',
-    limit: 1000,
-    description: 'Books, internet, sports equipment, gym membership',
+    limit: 2500,
+    description: 'Books, internet, sports equipment, gym membership, smartphone',
     category: 'Lifestyle'
   },
   medical: {
     name: 'Medical Expenses',
-    limit: 5000,
-    description: 'Medical checkups, dental, optical, treatment',
+    limit: 10000,
+    description: 'Serious disease treatment, medical checkups (up to RM1,000 for checkups), dental, optical',
     category: 'Health'
   },
   insurance: {
-    name: 'Life Insurance / Medical Insurance',
-    limit: 8000,
-    description: 'Insurance premiums (life, medical, accident)',
+    name: 'Life Insurance / Takaful',
+    limit: 3000,
+    description: 'Life insurance and takaful premiums (separate from EPF relief)',
     category: 'Insurance'
   },
   education: {
     name: 'Education Fees',
-    limit: 6000,
-    description: 'Higher education fees (university/college)',
+    limit: 7000,
+    description: 'Higher education fees — technical, vocational, post-graduate (university/college)',
     category: 'Education'
   },
   housing_interest: {
@@ -77,8 +77,8 @@ export const RELIEF_DETAILS = {
   },
   epfaso: {
     name: 'EPF / SOCSO Contributions',
-    limit: null,
-    description: 'Automatic - part of payroll deductions',
+    limit: 4000,
+    description: 'Employee EPF contributions (relief capped at RM4,000); SOCSO contributions also deductible',
     category: 'Automatic'
   }
 };
@@ -165,12 +165,16 @@ export const EXPENSE_CATEGORIES = [
   { id: 'ptptn', label: 'PTPTN Payment', relief: 'sspn' }
 ];
 
-export const TAX_BANDS_2024 = [
-  { min: 0, max: 35000, rate: 0 },
-  { min: 35001, max: 80000, rate: 0.03 },
-  { min: 80001, max: 135000, rate: 0.08 },
-  { min: 135001, max: 250000, rate: 0.135 },
-  { min: 250001, max: 400000, rate: 0.19 },
-  { min: 400001, max: 600000, rate: 0.23 },
-  { min: 600001, max: Infinity, rate: 0.25 }
+export const TAX_BANDS_2025 = [
+  { min: 0,       max: 5000,     rate: 0 },
+  { min: 5001,    max: 20000,    rate: 0.01 },
+  { min: 20001,   max: 35000,    rate: 0.03 },
+  { min: 35001,   max: 50000,    rate: 0.08 },
+  { min: 50001,   max: 70000,    rate: 0.13 },
+  { min: 70001,   max: 100000,   rate: 0.21 },
+  { min: 100001,  max: 250000,   rate: 0.24 },
+  { min: 250001,  max: 400000,   rate: 0.245 },
+  { min: 400001,  max: 600000,   rate: 0.25 },
+  { min: 600001,  max: 1000000,  rate: 0.26 },
+  { min: 1000001, max: Infinity, rate: 0.28 }
 ];

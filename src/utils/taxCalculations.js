@@ -1,6 +1,6 @@
 // src/utils/taxCalculations.js
 
-import { TAX_BANDS_2024 } from './reliefData';
+import { TAX_BANDS_2025 } from './reliefData';
 
 export const calculateTaxableIncome = (grossIncome, totalReliefs) => {
   return Math.max(0, grossIncome - totalReliefs);
@@ -9,7 +9,7 @@ export const calculateTaxableIncome = (grossIncome, totalReliefs) => {
 export const calculateTax = (taxableIncome) => {
   let tax = 0;
   
-  for (let band of TAX_BANDS_2024) {
+  for (let band of TAX_BANDS_2025) {
     if (taxableIncome > band.max) {
       tax += (band.max - band.min + 1) * band.rate;
     } else if (taxableIncome >= band.min) {
